@@ -9,13 +9,24 @@
 This project aims to design controller for servomechanism.
 
 ## Proposed mathematical model
+![alt text](/doc/math_scheme.png "Model")
 
 $$
 v(t) = Ri(t)+ K_e\omega(t) \\
 J\dot{\omega}(t) = K_mi(t) - \beta\omega(t) \\
 $$
+where: \
+$v(t)$ - input voltage \
+$i(t)$ - armature current \
+$\omega(t)$ - angular velocity of the rotor \
+$R$ - resistance of armature winding \
+$J$ - moment of inertia of the moving parts \
+$\beta$ - damping coefificient due to viscous friction \
+$K_e\omega(t)$ - back EMF \
+$K_mi(t)$ - electromechanical torque
 
-where:
+
+
 ## Sensors scaling
 
 ### Motor Encoder
