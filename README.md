@@ -9,7 +9,7 @@
 This project aims to design controller for servomechanism.
 
 ## Proposed mathematical model
-![alt text](/doc/images\math_scheme.png "Model")
+![scheme](doc/images/math_scheme.PNG)
 
 $$
 v(t) = Ri(t)+ K_e\omega(t) \\
@@ -47,7 +47,7 @@ Absolute encoder, produces output with range [-99.11, 97.61]. Additional process
 ### Tachometer
 We have acquired data for steady state conditions for 5 given outputs. Then we compare tachometer and encoder outputs. Given below chart we have noticed that the tachometer output is already scaled to $rad/s$.
 
-![alt text](/doc/images/identification.svg "Model")
+![alt text](doc/images/identification.svg "Model")
 
 
 ## Identification
@@ -71,7 +71,7 @@ $L_M=1[mH]$
 
 Rotating mass has following dimensions and mass:
 
-![alt text](/doc/images/brass_inertia_load.png "Model")
+![alttext](doc/images/brass_inertia_load.PNG)
 
 Inertia of the solid cylinder is given by the following equation:
 
@@ -94,7 +94,33 @@ $$
 
 ### Friction
 
+In order to identify damping coefficient we have followed equations:
 
+$$ 
+ v = Ri + k\omega \\
+ ki = \beta\omega + f_0
+$$
+They have been derived from the mathematical model, taking into account that we examine the system in steady-state.
+(MOŻNA COŚ DOPISAĆ O f0)
+
+After combining the equations, we have got:
+
+$$
+f_0 + \beta\omega = \frac{k}{R}v - \frac{k^2}{R}\omega
+$$
+
+The right side we have signed as RHS and on the left we have got linear function of $\omega$. Now, the task was to find the coefficients of the function. We have used the data from the experiment described above in 'Tachometer' part. 
+After choosing 5 points, we have calculated RHS for appropriate values of v and $\omega$. Then we have used Basic Fitting tool to find the coefficients of the linear function.
+
+We have got:
+
+![alttext](doc/images/damping.svg)
+
+$$
+f_0 = 7.9*10^{-7}  \\
+\beta = 1.96*10^{-3}
+\\JEDNOSTKI?
+$$
 
 # Useful links
 
