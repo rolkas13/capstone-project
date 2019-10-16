@@ -58,6 +58,15 @@ Given the datasheet parameter motor inertia is established as:
 
 $J_M = 1.8 * 10^{-5}  [kg*m^2]$
 
+### Motor torque constant
+
+$$
+k=5.3[\frac{mNm}{A}]=5.3*10^{-3}[\frac{V*s}{rad}]
+$$
+### Motor coil inductance
+
+$L_M=1[mH]$
+
 ### Rotating mass inertia
 
 Rotating mass has following dimensions and mass:
@@ -82,6 +91,11 @@ $$
 R=U/I \\
 R=6.65/2.45=2.71 [\Omega]
 $$
+
+### Friction
+
+
+
 # Useful links
 
 [Manufacturer website](http://www.inteco.com.pl/products/modular-servo/)
