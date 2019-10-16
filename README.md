@@ -9,7 +9,7 @@
 This project aims to design controller for servomechanism.
 
 ## Proposed mathematical model
-![alt text](/doc/math_scheme.png "Model")
+![alt text](/doc/images\math_scheme.png "Model")
 
 $$
 v(t) = Ri(t)+ K_e\omega(t) \\
@@ -45,13 +45,43 @@ Absolute encoder, produces output with range [-99.11, 97.61]. Additional process
 
 
 ### Tachometer
-We have acquired data for steady state conditions for 5 given outputs.
+We have acquired data for steady state conditions for 5 given outputs. Then we compare tachometer and encoder outputs. Given below chart we have noticed that the tachometer output is already scaled to $rad/s$.
+
+![alt text](/doc/images/identification.svg "Model")
 
 
+## Identification
+
+### Motor Inertia
+
+Given the datasheet parameter motor inertia is established as:
+
+$J_M = 1.8 * 10^{-5}  [kg*m^2]$
+
+### Rotating mass inertia
+
+Rotating mass has following dimensions and mass:
+
+![alt text](/doc/images/brass_inertia_load.png "Model")
+
+Inertia of the solid cylinder is given by the following equation:
+
+$J_{SM}=\frac{1}{2}mr^2=1.1*10^{-3} [kg*m^2]$
 
 
+### Resistance of the net
+First of all we have mesure the voltage of idle DC motor. In order to accomplish this task we have disconnected the DC motor power supply and measure the voltage value which is given below:\
+ $U=6.65 [V]$ 
 
+Then after reconnecting the motor we have locked the motor and measure the current with help of current probe. The result is given below:\
+$I=2.45 [A]$
 
+Finally we have used well-known Ohm formula to calculate resistance of the net:
+
+$$
+R=U/I \\
+R=6.65/2.45=2.71 [\Omega]
+$$
 # Useful links
 
 [Manufacturer website](http://www.inteco.com.pl/products/modular-servo/)
