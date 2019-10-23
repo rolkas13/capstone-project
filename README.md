@@ -13,7 +13,7 @@ This project aims to design controller for servomechanism.
 
 $$
 v(t) = Ri(t)+ K_e\omega(t) \\
-J\dot{\omega}(t) = K_mi(t) - \beta\omega(t) \\
+J\dot{\omega}(t) = K_mi(t) - \beta\omega(t)-f_0*sgn(\omega) \\
 $$
 where: \
 $v(t)$ - input voltage \
@@ -100,8 +100,8 @@ $$
  v = Ri + k\omega \\
  ki = \beta\omega + f_0
 $$
-They have been derived from the mathematical model, taking into account that we examine the system in steady-state.
-(MOŻNA COŚ DOPISAĆ O f0)
+They have been derived from the mathematical model, taking into account that we examine the system in steady-state. \
+$f_0$ - statci friction coefficient
 
 After combining the equations, we have got:
 
@@ -117,13 +117,15 @@ We have got:
 ![alttext](doc/images/damping.svg)
 
 $$
-f_0 = 7.9*10^{-7}  \\
-\beta = 1.96*10^{-3}
-\\JEDNOSTKI?
+f_0 = 1.8*10^{-3}  \\
+\beta = 1.3*10^{-4}
 $$
+
 
 # Useful links
 
 [Manufacturer website](http://www.inteco.com.pl/products/modular-servo/)
 
 [Test stand documentation](https://drive.google.com/file/d/1F0foLas4g3s24JEOM_dqSUn_Qu4ZN-Qn/view?usp=sharing)
+
+[Motor datasheet](http://www.buehler-motor.pl/download/DC%20Motor_51%20x%2088_1.13.044.2XX.pdf)
