@@ -1,0 +1,13 @@
+close all;
+subplot(1,2,2);
+plot(100*diff(enc));
+title('Encoder diff');
+xlabel('Sample no');
+ylabel('Encoder diff value');
+axis([0 5001 0 185]);
+subplot(1,2,1);
+plot(tach);
+title('Tachometer');
+xlabel('Sample no');
+ylabel('Tachometer value');
+axis([0 5001 0 185]);
