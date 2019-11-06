@@ -72,15 +72,10 @@ Using torque sensor and current measurment we calculeted proper value of the mot
 | Set point | Current [A] | Torque [N*cm] |
 | - | - | - |
 | 0.25 | 1.2 | 6 |
-| - | - | - |
 | 0.5 | 2.5 | 12.1 |
-| - | - | - |
 | 0.75 | 3.9 | 18 |
-| - | - | - |
 | -0.25 | -1.15 | -5.5 |
-| - | - | - |
 | -0.5 | -2.4 | -12.8 |
-| - | - | - |
 | -0.75 | -3.6 | -18 |
 
 
@@ -137,10 +132,21 @@ We have got:
 
 ![alttext](doc/images/damping.svg)
 
+Having identified the motor constant, he have repeated the identifiaction of friction coeficients:
+
+![alttext](doc/images/damping_proper.svg)
+
+
 $$
 f_0 = 1.8*10^{-3}  \\
-\beta = 1.3*10^{-4}
+\beta = 3.6*10^{-4}
 $$
+
+## Coast test
+
+In order to check the validity of friction coefficients we have conducted an experiment, called coast test. Then, we compared it with model simulation. The results, presented below, show that the coefficients were calculated correctly.
+
+![coast](doc/images/coast_test.svg)
 
 ## Servo model
 
