@@ -11,6 +11,7 @@ This project aims to design controller for servomechanism.
 ## Proposed mathematical model
 ![scheme](doc/images/math_scheme.PNG)
 
+Equation 1:
 $$
 v(t) = Ri(t)+ K_e\omega(t) \\
 J\dot{\omega}(t) = K_mi(t) - \beta\omega(t)-f_0*sgn(\omega) \\
@@ -120,6 +121,43 @@ $$
 f_0 = 1.8*10^{-3}  \\
 \beta = 1.3*10^{-4}
 $$
+
+## Servo model
+
+We have created folowing model of servo, according to Equation 1:
+
+![model](/doc/images/servo_model.PNG)
+
+The comparison of acquired data and model gace the following results:
+
+![comparison](doc/images/comp_servo_model.svg)
+
+## Control algorith considerations
+
+PID regulator can be implemented for control of plant. This method can be easily introduced as long as it require little knowledge of system dynamics.
+
+### PID tuning
+
+The following test stand was implemented to tune PID controller:
+
+![pid_tune](/doc/images/PID_tuning_test_stand.png)
+
+The results of PID tuning:
+
+![pid_tune_res](doc/images/pid_tuning_result.png)
+
+Transfer function of PID:
+$$
+G(s) = P + I \frac{1}{s} + D \frac{N}{1 + N\frac{1}{s}}
+$$
+Coefficents:
+$$
+P = 28 \\
+I = 23 \\
+D = 7.6 \\
+N = 22.7 \\
+$$
+
 
 
 # Useful links
