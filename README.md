@@ -64,6 +64,26 @@ $J_M = 1.8 * 10^{-5}  [kg*m^2]$
 $$
 k=5.3[\frac{mNm}{A}]=5.3*10^{-3}[\frac{V*s}{rad}]
 $$
+
+Comparing the real model and our simulations we found out that the motor torque constant provided by the manufacturer can be invalid. In order to address this issue we perfomed an experiment to identify the real motor torque constent.
+
+Using torque sensor and current measurment we calculeted proper value of the motor torque constant.
+
+| Set point | Current [A] | Torque [N*cm] |
+| - | - | - |
+| 0.25 | 1.2 | 6 |
+| - | - | - |
+| 0.5 | 2.5 | 12.1 |
+| - | - | - |
+| 0.75 | 3.9 | 18 |
+| - | - | - |
+| -0.25 | -1.15 | -5.5 |
+| - | - | - |
+| -0.5 | -2.4 | -12.8 |
+| - | - | - |
+| -0.75 | -3.6 | -18 |
+
+
 ### Motor coil inductance
 
 $L_M=1[mH]$
