@@ -158,10 +158,29 @@ The comparison of acquired data and model gace the following results:
 
 ![comparison](doc/images/comp_servo_model.svg)
 
-## Control algorith considerations
+## Control algorithm considerations
 
 PID regulator can be implemented for control of plant. This method can be easily introduced as long as it require little knowledge of system dynamics.
 
+There is a better idea. Considerating system dynamics, one can employ cascaded control system.
+The diagram below shows idea of such control system:
+
+
+The structure is as follows:
+
+| Controller | Controlled variable | Implemented |
+| - | - | - |
+| primary, outermost, master | position | yes |
+| secondary controler | velocity | yes |
+| tertiary, inner-most | current | no |
+
+## Secondary PID controller tuning
+
+Using Ziegler–Nichols method, we found out that $P = 2,5$ causes instability in system respone. $P = 1.25$ therefore.
+P = 0.03
+
+P = 5
+I = 0.1
 ### PID tuning
 
 The following test stand was implemented to tune PID controller:
