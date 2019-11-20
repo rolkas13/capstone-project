@@ -177,15 +177,35 @@ The structure is as follows:
 ## Secondary PID controller tuning
 
 Using Ziegler–Nichols method, we found out that $P = 2,5$ causes instability in system respone. $P = 1.25$ therefore.
-P = 0.03
 
-P = 5
-I = 0.1
+However, test on the plant showed instability of system. Using heuristic/empirical method we found out optimal gain value: $P = 0.03$.
+
+## Primary PID controller tuning
+
+using method as above we found optimal setting for PID:
+
+$P = 5 \\ I = 0.1$
+
+## Filtering consideration
+The tests on real plant showed that filtering of velocity signal is critical to quality of regulation. 
+
+The figure below shows comaprision of filtering techniques, compared to raw signal:
+
+![fitl](doc/images/filtering.svg)
+
+ - inertia object $G(S) = \frac{1}{0.05s + 1}$
+ - fir coefficients $fir_coeff = [1,1,1,1,1,1,1,1,1,1]$
+ - fir1 coefficients $fir\_coeff1 = fir1(10, 0.15)$
+
+## Feedforward control
+
+
+
 ### PID tuning
 
 The following test stand was implemented to tune PID controller:
 
-![pid_tune](/doc/images/PID_tuning_test_stand.png)
+![pid_tune](doc/images/PID_tuning_test_stand.png)
 
 The results of PID tuning:
 
