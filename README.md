@@ -1,10 +1,41 @@
 # Servomechanism control
-## Capstone Project
+
+    Capstone Project
+
 `Karol Rola`
 
 `Piotr Ogórek`
 
 `Piotr Kozimor`
+
+- [Servomechanism control](#servomechanism-control)
+  - [Proposed mathematical model](#proposed-mathematical-model)
+  - [Sensors scaling](#sensors-scaling)
+    - [Motor Encoder](#motor-encoder)
+    - [Input Encoder](#input-encoder)
+    - [Tachometer](#tachometer)
+  - [Identification](#identification)
+    - [Motor Inertia](#motor-inertia)
+    - [Motor torque constant](#motor-torque-constant)
+    - [Motor coil inductance](#motor-coil-inductance)
+    - [Rotating mass inertia](#rotating-mass-inertia)
+    - [Resistance of the net](#resistance-of-the-net)
+    - [Friction](#friction)
+    - [Coast test](#coast-test)
+  - [Model evaluation](#model-evaluation)
+  - [Controller](#controller)
+    - [Secondary PID controller tuning](#secondary-pid-controller-tuning)
+    - [Primary PID controller tuning](#primary-pid-controller-tuning)
+    - [Filtering consideration](#filtering-consideration)
+    - [Feedforward control - trajectory generator](#feedforward-control---trajectory-generator)
+    - [PID tuning](#pid-tuning)
+  - [Controller evaluation](#controller-evaluation)
+    - [Setpoint following](#setpoint-following)
+    - [Setpoint following without trajectory generator](#setpoint-following-without-trajectory-generator)
+    - [Disturbance rejection](#disturbance-rejection)
+    - [Robustness](#robustness)
+  - [Conclusions](#conclusions)
+  - [Useful links](#useful-links)
 
 This project aims to design controller for servomechanism.
 
@@ -142,23 +173,23 @@ f_0 = 1.8*10^{-3}  \\
 \beta = 3.6*10^{-4}
 $$
 
-## Coast test
+### Coast test
 
 In order to check the validity of friction coefficients we have conducted an experiment, called coast test. Then, we compared it with model simulation. The results, presented below, show that the coefficients were calculated correctly.
 
 ![coast](doc/images/coast_test.svg)
 
-## Servo model
+## Model evaluation
 
 We have created folowing model of servo, according to Equation 1:
 
-![model](/doc/images/servo_model.PNG)
+![model](doc/images/servo_model.png)
 
-The comparison of acquired data and model gace the following results:
+The comparison of acquired data and model yields the following results:
 
 ![comparison](doc/images/comp_servo_model.svg)
 
-## Control algorithm considerations
+## Controller
 
 PID regulator can be implemented for control of plant. This method can be easily introduced as long as it require little knowledge of system dynamics.
 
@@ -174,19 +205,19 @@ The structure is as follows:
 | secondary controler | velocity | yes |
 | tertiary, inner-most | current | no |
 
-## Secondary PID controller tuning
+### Secondary PID controller tuning
 
 Using Ziegler–Nichols method, we found out that $P = 2,5$ causes instability in system respone. $P = 1.25$ therefore.
 
 However, test on the plant showed instability of system. Using heuristic/empirical method we found out optimal gain value: $P = 0.03$.
 
-## Primary PID controller tuning
+### Primary PID controller tuning
 
 using method as above we found optimal setting for PID:
 
 $P = 5 \\ I = 0.1$
 
-## Filtering consideration
+### Filtering consideration
 The tests on real plant showed that filtering of velocity signal is critical to quality of regulation. 
 
 The figure below shows comaprision of filtering techniques, compared to raw signal:
@@ -197,9 +228,9 @@ The figure below shows comaprision of filtering techniques, compared to raw sign
  - fir coefficients $fir_coeff = [1,1,1,1,1,1,1,1,1,1]$
  - fir1 coefficients $fir\_coeff1 = fir1(10, 0.15)$
 
-## Feedforward control
+### Feedforward control - trajectory generator
 
-
+TODO Peter the Cucumber First
 
 ### PID tuning
 
@@ -223,9 +254,51 @@ D = 7.6 \\
 N = 22.7 \\
 $$
 
+## Controller evaluation
+
+The following test were conducted in order to check control quality of system:
+1. setpoint folowing
+2. setpoint following without trajectory generator
+3. disturbance rejection
+4. robustness
+
+### Setpoint following
+
+![setpoint](doc/images/exp1_pos.svg)
+![setpoint](doc/images/exp1_vel.svg)
+
+### Setpoint following without trajectory generator
+
+![setpoint](doc/images/exp2_pos.svg)
+![setpoint](doc/images/exp2_vel.svg)
+
+### Disturbance rejection
+
+![setpoint](doc/images/exp3_pos.svg)
+![setpoint](doc/images/exp3_vel.svg)
+
+### Robustness
+
+![setpoint](doc/images/exp4_pos.svg)
+![setpoint](doc/images/exp4_vel.svg)
 
 
-# Useful links
+## Conclusions
+
+We had issues with prameters estimation as long as the motor constant provided by manufacturer in datasheets was mistaken by orded of mangitude. We have discovered this issue by series of two tests (steady-state friction force fitting and coast test). 
+
+After solving issue above, outputs of model and real system matches.
+
+The PID tuning process brought a lot of suprises. In particular, the velocity controller was tuned in simulation to considerably high values of parameters. These values did not work on the plant. The identified root cause was filtering velocity signal. Having tested few method of filtering we was able to establish a stable system with lower PID parameters.
+
+The constrol system design is roboust and non susceptible to considerably large disturbances.
+
+We were not able to control system with inertia removed.
+However, this is drastic change to system dynamic. One could design controlled handling such change, however the control quality across the all possisble dynamic would suffer.
+
+We were not able to control system with backlash inserted between encoder and interia too. In such case one would have to probably change whole control strategy for system.
+
+## Useful links
 
 [Manufacturer website](http://www.inteco.com.pl/products/modular-servo/)
 

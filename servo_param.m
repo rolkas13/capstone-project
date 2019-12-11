@@ -1,3 +1,5 @@
+clear all;
+input_encoder_params
 f_0 = 0.018;
 R = 2.71;
 K = 0.053;
@@ -11,9 +13,8 @@ fir_coeff1 = fir1(10, 0.15);
 
 repeat_time = [0 ]
 for i = 0:7
-    repeat_time = [repeat_time 1+2*i 1+2*i+0.01]
+    repeat_time = [repeat_time 1+2*i 1+2*i+0.2]
 end
-repeat_time = [repeat_time]
 
 repeat_item = [0 1 1 0 0 -1 -1 0]
 repeat_item1 = [0 -1 -1 0 0 1 1 0]
