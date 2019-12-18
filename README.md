@@ -45,7 +45,7 @@ This project aims to design controller for servomechanism.
 Equation 1:
 $$
 v(t) = Ri(t)+ K_e\omega(t) \\
-J\dot{\omega}(t) = K_mi(t) - \beta\omega(t)-f_0*sgn(\omega) \\
+J\dot{\omega}(t) = K_mi(t) - \beta\omega(t)-f_0\cdot sgn(\omega) \\
 $$
 where: \
 $v(t)$ - input voltage \
@@ -68,7 +68,7 @@ Rotor of DC motor was rotated 10 times. Obtaning raw measurements gave us follow
 | -92.7568 | -155.4122 |
 
 $$
-(enc_f - enc_s)/ 10/ 2 =-3.1328
+(enc_{finish} - enc_{start}/ 10/ 2 =-3.1328
 $$
 The result is close to $\pi$. That meas that enccoer reading is already scaled to radians.
 
@@ -77,7 +77,7 @@ Absolute encoder, produces output with range [-99.11, 97.61]. Additional process
 
 
 ### Tachometer
-We have acquired data for steady state conditions for 5 given outputs. Then we compare tachometer and encoder outputs. Given below chart we have noticed that the tachometer output is already scaled to $rad/s$.
+We have acquired data for steady state conditions for 5 given outputs. Then we compare tachometer and encoder outputs. Given below chart we have noticed that the tachometer output is already scaled to rad/s.
 
 ![alt text](doc/images/identification.svg "Model")
 
@@ -88,19 +88,19 @@ We have acquired data for steady state conditions for 5 given outputs. Then we c
 
 Given the datasheet parameter motor inertia is established as:
 
-$J_M = 1.8 * 10^{-5}  [kg*m^2]$
+$$J_M = 1.8  \cdot  10^{-5} \;  kg \cdot m^2$$
 
 ### Motor torque constant
 
 $$
-k=5.3[\frac{mNm}{A}]=5.3*10^{-3}[\frac{V*s}{rad}]
+k=5.3 \;\frac{mNm}{A}=5.3 \cdot 10^{-3} \; \frac{V \cdot s}{rad}
 $$
 
 Comparing the real model and our simulations we found out that the motor torque constant provided by the manufacturer can be invalid. In order to address this issue we perfomed an experiment to identify the real motor torque constent.
 
-Using torque sensor and current measurment we calculeted proper value of the motor torque constant.
+Using torque sensor and current measurment we calculeted correct value of the motor torque constant.
 
-| Set point | Current [A] | Torque [N*cm] |
+| Set point | Current [A] | Torque [Ncm] |
 | - | - | - |
 | 0.25 | 1.2 | 6 |
 | 0.5 | 2.5 | 12.1 |
@@ -112,7 +112,7 @@ Using torque sensor and current measurment we calculeted proper value of the mot
 
 ### Motor coil inductance
 
-$L_M=1[mH]$
+$$L_M=1.0\;mH$$
 
 ### Rotating mass inertia
 
@@ -122,21 +122,21 @@ Rotating mass has following dimensions and mass:
 
 Inertia of the solid cylinder is given by the following equation:
 
-$J_{SM}=\frac{1}{2}mr^2=1.1*10^{-3} [kg*m^2]$
+$$J_{SM}=\frac{1}{2}mr^2=1.1 \cdot 10^{-3} \;kg \cdot m^2$$
 
 
 ### Resistance of the net
 First of all we have mesure the voltage of idle DC motor. In order to accomplish this task we have disconnected the DC motor power supply and measure the voltage value which is given below:\
- $U=6.65 [V]$ 
+ $U=6.65 V$ 
 
 Then after reconnecting the motor we have locked the motor and measure the current with help of current probe. The result is given below:\
-$I=2.45 [A]$
+$$I=2.45 \;A$$
 
 Finally we have used well-known Ohm formula to calculate resistance of the net:
 
 $$
 R=U/I \\
-R=6.65/2.45=2.71 [\Omega]
+R=6.65/2.45=2.71 \; \Omega
 $$
 
 ### Friction
@@ -169,8 +169,8 @@ Having identified the motor constant, he have repeated the identifiaction of fri
 
 
 $$
-f_0 = 1.8*10^{-3}  \\
-\beta = 3.6*10^{-4}
+f_0 = 1.8 \cdot 10^{-3}  \\
+\beta = 3.6 \cdot 10^{-4}
 $$
 
 ### Coast test
@@ -215,7 +215,7 @@ However, test on the plant showed instability of system. Using heuristic/empiric
 
 using method as above we found optimal setting for PID:
 
-$P = 5 \\ I = 0.1$
+$$P = 5 \\ I = 0.1$$
 
 ### Filtering consideration
 The tests on real plant showed that filtering of velocity signal is critical to quality of regulation. 

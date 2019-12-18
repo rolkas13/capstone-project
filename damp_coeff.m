@@ -7,7 +7,7 @@ for i = 0:4
 end
 
 plot(mean_vec, p_vec ,'*')
-xlabel('omega')
-ylabel('RHS')
+xlabel('Angular velocity [rad/s]')
+ylabel('RHS [Am/s]')
 title('Linear fitting of parameters f0 and beta')
 
