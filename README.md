@@ -230,7 +230,9 @@ The figure below shows comaprision of filtering techniques, compared to raw sign
 
 ### Feedforward control - trajectory generator
 
-TODO Peter the Cucumber First
+In order to improve quality of control the simple trajectory generator was implemented. It uses pre-defined time series of acceleration to create velocity and position references. The figure below shows time series that was genereted for position, velocity and acceleration.
+
+![tg](doc/images/trajectory_generator.svg)
 
 ### PID tuning
 
@@ -297,6 +299,8 @@ We were not able to control system with inertia removed.
 However, this is drastic change to system dynamic. One could design controlled handling such change, however the control quality across the all possisble dynamic would suffer.
 
 We were not able to control system with backlash inserted between encoder and interia too. In such case one would have to probably change whole control strategy for system.
+
+The trajectory generator brought significant improvement to the quality of the control. The system managed to catch up with the setpoint.
 
 ## Useful links
 
