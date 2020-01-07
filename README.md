@@ -37,8 +37,30 @@
   - [Conclusions](#conclusions)
   - [Useful links](#useful-links)
 
-This project aims to design controller for servomechanism.
+## Overview
+This project aims to design controller for Modular Servo System(**MSS**). The **MSS** consists of several parts mounted together at the metal rail and arranged in the chain:
+ - the DC motor with the tachogenerator,
+ - inertia load,
+ - encoder,
+ - eddy current brake,
+ - gearbox with the output disk.
 
+The rotation angle of the DC motor shaft is measured using an incremental encoder. A tachogenerator is connected directly to the DC motor and generates a voltage signal proportional to the angular velocity. 
+
+The servomechanism is connected to a computer where a control algorithm is realized
+based on measurements of angle and angular velocity. The accuracy of measurement of velocity is 5% while the accuracy
+of angle measurement is 0.1%. The armature voltage of the DC motor is controlled by PWM
+signal. For this reason the dimensionless control signal is the scaled input voltage,
+$u(t)=v(t)/v_{max}$. The admissible controls satisfy $|u(t)|\leq1$ and $v_{max} =12 V$.
+
+The measurement system is based on RTDAC/USB2 acquisition board equipped with A/D
+converters.
+
+The I/O board communicates with the power interface unit. The whole logic necessary to
+activate and read the encoder signals and to generate the appropriate sequence of PWM pulses
+to control the DC motor is configured in the Xilinx chip of the RT-DAC/USB2 board. All
+functions of the board are accessed from the Modular Servo Toolbox which operates directly
+in the MATLAB/Simulink environment.
 ## Proposed mathematical model
 ![scheme](doc/images/math_scheme.PNG)
 
@@ -70,10 +92,10 @@ Rotor of DC motor was rotated 10 times. Obtaning raw measurements gave us follow
 $$
 (enc_{finish} - enc_{start}/ 10/ 2 =-3.1328
 $$
-The result is close to $\pi$. That meas that enccoer reading is already scaled to radians.
+The result is close to $\pi$. That meas that encoder reading is already scaled to radians.
 
-### Input Encoder
-Absolute encoder, produces output with range [-99.11, 97.61]. Additional processing is neccessary for continous angle measurement.
+### Input Potentiometer
+Absolute potentiometer, produces output with range [-99.11, 97.61]. Additional processing is neccessary for continous angle measurement.
 
 
 ### Tachometer
@@ -130,7 +152,7 @@ First of all we have mesure the voltage of idle DC motor. In order to accomplish
  $U=6.65 V$ 
 
 Then after reconnecting the motor we have locked the motor and measure the current with help of current probe. The result is given below:\
-$$I=2.45 \;A$$
+$I=2.45 \;A$
 
 Finally we have used well-known Ohm formula to calculate resistance of the net:
 
@@ -160,10 +182,6 @@ The right side we have signed as RHS and on the left we have got linear function
 After choosing 5 points, we have calculated RHS for appropriate values of v and $\omega$. Then we have used Basic Fitting tool to find the coefficients of the linear function.
 
 We have got:
-
-![alttext](doc/images/damping.svg)
-
-Having identified the motor constant, he have repeated the identifiaction of friction coeficients:
 
 ![alttext](doc/images/damping_proper.svg)
 
@@ -302,7 +320,7 @@ We were not able to control system with backlash inserted between encoder and in
 
 The trajectory generator brought significant improvement to the quality of the control. The system managed to catch up with the setpoint.
 
-## Useful links
+## References
 
 [Manufacturer website](http://www.inteco.com.pl/products/modular-servo/)
 
