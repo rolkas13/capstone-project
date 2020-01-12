@@ -1,42 +1,32 @@
-# Servomechanism control
 
-    Capstone Project
-
-`Karol Rola`
-
-`Piotr Ogórek`
-
-`Piotr Kozimor`
-
-- [Servomechanism control](#servomechanism-control)
-  - [Overview](#overview)
-  - [Proposed mathematical model](#proposed-mathematical-model)
-  - [Sensors scaling](#sensors-scaling)
-    - [Motor Encoder](#motor-encoder)
-    - [Input Potentiometer](#input-potentiometer)
-    - [Tachometer](#tachometer)
-  - [Identification](#identification)
-    - [Motor Inertia](#motor-inertia)
-    - [Motor torque constant](#motor-torque-constant)
-    - [Motor coil inductance](#motor-coil-inductance)
-    - [Rotating mass inertia](#rotating-mass-inertia)
-    - [Resistance of the net](#resistance-of-the-net)
-    - [Friction](#friction)
-    - [Coast test](#coast-test)
-  - [Model evaluation](#model-evaluation)
-  - [Controller](#controller)
-    - [Secondary PID controller tuning](#secondary-pid-controller-tuning)
-    - [Primary PID controller tuning](#primary-pid-controller-tuning)
-    - [Filtering consideration](#filtering-consideration)
-    - [Feedforward control - trajectory generator](#feedforward-control---trajectory-generator)
-    - [PID tuning](#pid-tuning)
-  - [Controller evaluation](#controller-evaluation)
-    - [Setpoint following](#setpoint-following)
-    - [Setpoint following without trajectory generator](#setpoint-following-without-trajectory-generator)
-    - [Disturbance rejection](#disturbance-rejection)
-    - [Robustness](#robustness)
-  - [Conclusions](#conclusions)
-  - [References](#references)
+- [Overview](#overview)
+- [Proposed mathematical model](#proposed-mathematical-model)
+- [Sensors scaling](#sensors-scaling)
+  - [Motor Encoder](#motor-encoder)
+  - [Input Potentiometer](#input-potentiometer)
+  - [Tachometer](#tachometer)
+- [Identification](#identification)
+  - [Motor Inertia](#motor-inertia)
+  - [Motor torque constant](#motor-torque-constant)
+  - [Motor coil inductance](#motor-coil-inductance)
+  - [Rotating mass inertia](#rotating-mass-inertia)
+  - [Resistance of the net](#resistance-of-the-net)
+  - [Friction](#friction)
+  - [Coast test](#coast-test)
+- [Model evaluation](#model-evaluation)
+- [Controller](#controller)
+  - [Secondary PID controller tuning](#secondary-pid-controller-tuning)
+  - [Primary PID controller tuning](#primary-pid-controller-tuning)
+  - [Filtering consideration](#filtering-consideration)
+  - [Feedforward control - trajectory generator](#feedforward-control---trajectory-generator)
+  - [PID tuning](#pid-tuning)
+- [Controller evaluation](#controller-evaluation)
+  - [Setpoint following](#setpoint-following)
+  - [Setpoint following without trajectory generator](#setpoint-following-without-trajectory-generator)
+  - [Disturbance rejection](#disturbance-rejection)
+  - [Robustness](#robustness)
+- [Conclusions](#conclusions)
+- [References](#references)
 
 ## Overview
 This project aims to design controller for Modular Servo System(**MSS**). The **MSS** consists of several parts mounted together at the metal rail and arranged in the chain:
