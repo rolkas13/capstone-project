@@ -9,10 +9,11 @@
 `Piotr Kozimor`
 
 - [Servomechanism control](#servomechanism-control)
+  - [Overview](#overview)
   - [Proposed mathematical model](#proposed-mathematical-model)
   - [Sensors scaling](#sensors-scaling)
     - [Motor Encoder](#motor-encoder)
-    - [Input Encoder](#input-encoder)
+    - [Input Potentiometer](#input-potentiometer)
     - [Tachometer](#tachometer)
   - [Identification](#identification)
     - [Motor Inertia](#motor-inertia)
@@ -35,7 +36,7 @@
     - [Disturbance rejection](#disturbance-rejection)
     - [Robustness](#robustness)
   - [Conclusions](#conclusions)
-  - [Useful links](#useful-links)
+  - [References](#references)
 
 ## Overview
 This project aims to design controller for Modular Servo System(**MSS**). The **MSS** consists of several parts mounted together at the metal rail and arranged in the chain:
@@ -90,7 +91,7 @@ Rotor of DC motor was rotated 10 times. Obtaning raw measurements gave us follow
 | -92.7568 | -155.4122 |
 
 $$
-(enc_{finish} - enc_{start}/ 10/ 2 =-3.1328
+(enc_{finish} - enc_{start})/ 10/ 2 =-3.1328
 $$
 The result is close to $\pi$. That meas that encoder reading is already scaled to radians.
 
@@ -170,7 +171,7 @@ $$
  ki = \beta\omega + f_0
 $$
 They have been derived from the mathematical model, taking into account that we examine the system in steady-state. \
-$f_0$ - statci friction coefficient
+$f_0$ - static friction coefficient
 
 After combining the equations, we have got:
 
@@ -201,7 +202,7 @@ In order to check the validity of friction coefficients we have conducted an exp
 
 We have created folowing model of servo, according to Equation 1:
 
-![model](doc/images/servo_model.png)
+![model](doc/images/servo_model.PNG)
 
 The comparison of acquired data and model yields the following results:
 
@@ -243,8 +244,8 @@ The figure below shows comaprision of filtering techniques, compared to raw sign
 ![fitl](doc/images/filtering.svg)
 
  - inertia object $G(S) = \frac{1}{0.05s + 1}$
- - fir coefficients $fir_coeff = [1,1,1,1,1,1,1,1,1,1]$
- - fir1 coefficients $fir\_coeff1 = fir1(10, 0.15)$
+ - fir coefficients $fc_1 = [1,1,1,1,1,1,1,1,1,1]$
+ - fir1 coefficients $fc_2 = fir1(10, 0.15)$
 
 ### Feedforward control - trajectory generator
 
@@ -256,7 +257,7 @@ In order to improve quality of control the simple trajectory generator was imple
 
 The following test stand was implemented to tune PID controller:
 
-![pid_tune](doc/images/PID_tuning_test_stand.png)
+![pid_tune](doc/images/PID_tuning_test_stand.PNG)
 
 The results of PID tuning:
 
@@ -285,21 +286,25 @@ The following test were conducted in order to check control quality of system:
 ### Setpoint following
 
 ![setpoint](doc/images/exp1_pos.svg)
+
 ![setpoint](doc/images/exp1_vel.svg)
 
 ### Setpoint following without trajectory generator
 
 ![setpoint](doc/images/exp2_pos.svg)
+
 ![setpoint](doc/images/exp2_vel.svg)
 
 ### Disturbance rejection
 
 ![setpoint](doc/images/exp3_pos.svg)
+
 ![setpoint](doc/images/exp3_vel.svg)
 
 ### Robustness
 
 ![setpoint](doc/images/exp4_pos.svg)
+
 ![setpoint](doc/images/exp4_vel.svg)
 
 
@@ -322,8 +327,5 @@ The trajectory generator brought significant improvement to the quality of the c
 
 ## References
 
-[Manufacturer website](http://www.inteco.com.pl/products/modular-servo/)
-
-[Test stand documentation](https://drive.google.com/file/d/1F0foLas4g3s24JEOM_dqSUn_Qu4ZN-Qn/view?usp=sharing)
-
-[Motor datasheet](http://www.buehler-motor.pl/download/DC%20Motor_51%20x%2088_1.13.044.2XX.pdf)
+ - [Manufacturer website](http://www.inteco.com.pl/products/modular-servo/) - http://www.inteco.com.pl/products/modular-servo/
+ - [Motor datasheet](http://www.buehler-motor.pl/download/DC%20Motor_51%20x%2088_1.13.044.2XX.pdf) - http://www.buehler-motor.pl/download/DC%20Motor_51%20x%2088_1.13.044.2XX.pdf
