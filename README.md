@@ -1,4 +1,3 @@
-
 - [Overview](#overview)
 - [Proposed mathematical model](#proposed-mathematical-model)
 - [Sensors scaling](#sensors-scaling)
